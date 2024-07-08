@@ -2,10 +2,14 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const path = require('path');
+// const expressHbs = require('express-handlebars');
 
 const app = express();
 
-app.set('view engine', 'pug'); //pug is supported by express 
+// app.engine('hbs', expressHbs.engine({ extname: "hbs", defaultLayout: "main-layout", layoutsDir: "views/layouts/", }));
+// app.set('view engine', 'pug'); //pug is supported by express 
+// app.set('view engine','hbs');
+app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 const adminData = require('./routes/admin')
@@ -27,7 +31,7 @@ app.use(shopRoutes);
 
 app.use((req,res,next)=>{
     // res.status(404).sendFile(path.join(__dirname,'views','page-not-found.html'))
-    res.status(404).render('page-not-found',{pageTitle:'Page Not Found'});
+    res.status(404).render('page-not-found',{pageTitle:'Page Not Found',path:'Error'});
 });
 
 app.listen(3000);
